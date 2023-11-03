@@ -1,0 +1,37 @@
+#include "shell.h"
+
+int main(void) {
+	char *command = NULL, **args;
+	size_t buffer_size = 128;
+	ssize_t command_length;
+
+	signal(SIGINT, signal_handler);
+
+	while (true)
+	{
+	int i = 0;
+	prompt();
+	command_length = _getline(&command, &buffer_size, stdin);
+
+	if (command_length == -1)
+	{
+		_putchar('\n');
+		free(command);
+		exit(EXIT_SUCCESS);
+	}
+
+	args = tokenizer(command);
+	while (args[i] != NULL)
+	{
+		print(args[i]);
+		_putchar('\n');
+		i++;
+	}
+
+	free_args(args);
+	}
+
+	free(command);
+	return (0);
+}
+
