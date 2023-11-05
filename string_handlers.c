@@ -27,17 +27,20 @@ size_t _strlen(const char *str)
 
 char *_strcpy(char *dest, const char *src)
 {
-	int i = 0;
+    size_t i;
 
-	while (dest[i] != '\0' || src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
+    if (dest == NULL || src == NULL)
+    {
+        return NULL;
+    }
 
-	dest[i] = '\0';
+    for (i = 0; src[i] != '\0'; i++)
+    {
+        dest[i] = src[i];
+    }
+    dest[i] = '\0';
 
-	return (dest);
+    return dest;
 }
 
 /**
@@ -48,28 +51,23 @@ char *_strcpy(char *dest, const char *src)
 
 char *_strdup(const char *str)
 {
-	int i, j;
-	char *dest;
+    size_t len;
+    char *duplicate;
 
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	for (j = 0; str[j] != '\0';)
-	{
-		j++;
-	}
-	dest = malloc(sizeof(char) * j + 1);
-	if (dest == NULL)
-	{
-		return (NULL);
-	}
-	for (i = 0; i < j; i++)
-	{
-		dest[i] = str[i];
-	}
-	dest[j] = str[j];
-	return (dest);
+    if (str == NULL)
+    {
+        return NULL;
+    }
+
+    len = strlen(str) + 1;
+
+    duplicate = (char *)malloc(len);
+    if (duplicate == NULL) {
+        return NULL;
+    }
+
+    _strcpy(duplicate, str);
+    return duplicate;
 }
 
 /**

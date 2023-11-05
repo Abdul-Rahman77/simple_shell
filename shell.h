@@ -38,5 +38,6 @@ bool is_found(char *executable);
 
 /* path_handlers */
 char *getpath(const char *filename, char *program_name);
+char *find_command_path(const char *command);
 
 #endif

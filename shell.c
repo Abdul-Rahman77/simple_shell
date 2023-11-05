@@ -5,14 +5,14 @@
  * Return: 0 always
  */
 
-int main(int argc, char *argv[])
+int main(void)
 {
 	char *command, **args;
 	size_t buffer_size = 128;
 	ssize_t command_length;
 	
 	signal(SIGINT, signal_handler);
-	while (argc)
+	while (true)
 	{
 		command = NULL;
 		prompt();
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			args[0] = getpath(args[0], argv[0]);
+			args[0] = find_command_path(args[0]);
 			if (args[0] == NULL)
 			{
 				free(command);
