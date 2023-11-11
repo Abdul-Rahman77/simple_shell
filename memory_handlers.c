@@ -19,6 +19,22 @@ void free_args(char **args)
 }
 
 /**
+ * free_malloc - frees a memory allocated to str
+ * @str: the string with memory allocation
+ */
+
+bool is_malloc(char *str)
+{
+	if (str == NULL)
+	{
+		perror("Memory allocation failed");
+		return (true);
+	}
+	
+	return (false);
+}
+
+/**
  * _malloc - allocates memory
  * @size: the size to be used in allocation
  * Return: the allocated memory
@@ -54,4 +70,23 @@ char *_realloc(char *str, size_t size)
 	}
 
 	return (str);
+}
+
+/**
+ * realloc_args - reallocates memory for args
+ * @args: the pointer to the allocated memory to be reallocated;
+ * @size: the size of the new memory
+ * Return: pointer to the newly allocated memory
+ */
+
+char **realloc_args(char **args, size_t size)
+{
+	args = (char **)realloc(args, size * sizeof(char));
+	if (args == NULL)
+	{
+		perror("Memory reallocation failed");
+		exit(EXIT_FAILURE);
+	}
+
+	return (args);
 }

@@ -21,7 +21,10 @@ void signal_handler(int signal_int);
 size_t _strlen(const char *str);
 char *_strcpy(char *dest, const char *src);
 char *_strdup(const char *str);
+char *_strcat(char *dest, const char *src);
 char **tokenizer(char *command);
+
+/* string_handlers2 */
 
 /* stdin_handlers */
 ssize_t _getchar(void);
@@ -31,6 +34,8 @@ ssize_t _getline(char **line, size_t *size, FILE *stream);
 void free_args(char **args);
 char *_malloc(size_t size);
 char *_realloc(char *str, size_t size);
+bool is_malloc(char *str);
+char **realloc_args(char **args, size_t size);
 
 /* execution_handlers */
 void execute_command(char **args);
@@ -38,6 +43,6 @@ bool is_found(char *executable);
 
 /* path_handlers */
 char *getpath(const char *filename, char *program_name);
-char *find_command_path(const char *command);
+char *get_full_path(const char *command, char *token);
 
 #endif

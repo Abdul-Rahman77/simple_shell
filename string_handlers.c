@@ -71,50 +71,74 @@ char *_strdup(const char *str)
 }
 
 /**
+ * _strcat - concatenates two strings
+ * @dest: input value
+ * @src: input value
+ *
+ * Return: void
+ */
+char *_strcat(char *dest, const char *src)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (dest[i] != '\0')
+	{   
+		i++;
+	}   
+	j = 0;
+	while (src[j] != '\0')
+	{   
+		dest[i] = src[j];
+		i++;
+		j++;
+	}   
+
+	dest[i] = '\0';
+	return (dest);
+}
+
+/**
  * tokenizer - generates token from the command entered
  * @command: the command to be parsed and tokenized
  * Return: the tokens generated
  */
 
+char **tokenizer(char *command)
+{
+    char *token, *command_copy;
+    char *delim = " \t\n";
+    char **tok = NULL;
+    int i = 0;
 
-char **tokenizer(char *command) {
-	char *token, *command_copy;
-	char *delim = " \t\n";
-	char **tok = NULL;
-	int i = 0;
-
-	tok = (char **)calloc(1, sizeof(char *));
-	if (tok == NULL)
+    command_copy = _strdup(command);
+    is_malloc(command_copy);
+    tok = (char **)malloc(sizeof(char *));
+    if (tok == NULL)
+    {
+        perror("Memory allocation error");
+        free(command_copy);
+        exit(EXIT_FAILURE);
+    }
+    token = strtok(command_copy, delim);
+    while (token != NULL)
+    {
+	tok = realloc_args(tok, (i + 1) * sizeof(char));
+        tok[i] = _strdup(token);
+        if (tok[i] == NULL)
 	{
-		perror("Memory allocation error");
-		exit(EXIT_FAILURE);
-	}
-	command_copy = _strdup(command);
-	token = strtok(command_copy, delim);
-	while (token != NULL)
-	{
-		tok = (char **)realloc(tok, (i + 2) * sizeof(char *));
-		if (tok == NULL)
-		{
-		    perror("Memory allocation error");
-		    free(command_copy);
-		    exit(EXIT_FAILURE);
-		}
-		tok[i] = _strdup(token);
-		token = strtok(NULL, delim);
-		i++;
-	}
-
-	tok = (char **)realloc(tok, (i + 1) * sizeof(char *));
-	if (tok == NULL)
-	{
-		perror("Memory allocation error");
-		free(command_copy);
-		exit(EXIT_FAILURE);
-	}
-
-	tok[i] = NULL;
-	free(command_copy);
-	return tok;
+            perror("Memory allocation error");
+            free(command_copy);
+	    free_args(tok);
+            exit(EXIT_FAILURE);
+        }
+        token = strtok(NULL, delim);
+        i++;
+    }
+    tok = realloc_args(tok, (i + 1) * sizeof(char *));
+    tok[i] = NULL;
+    free(command_copy);
+    return tok;
 }
 
