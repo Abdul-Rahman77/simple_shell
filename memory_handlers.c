@@ -21,7 +21,7 @@ void free_args(char **args)
 /**
  * is_malloc - frees a memory allocated to str
  * @str: the string with memory allocation
- * Return : is_malloc
+ * Return: false if str is not NULL and true for the otherwise
  */
 
 bool is_malloc(char *str)
@@ -57,6 +57,7 @@ char *_malloc(size_t size)
 /**
  * _realloc - reallocates memory for an existing malloc string
  * @str: the char pointer to be reallocated memory for
+ * @size: the size of the new new allocation
  * Return: a pointer to the newly allocated memory
  */
 

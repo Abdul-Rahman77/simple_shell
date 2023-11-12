@@ -8,10 +8,9 @@ ssize_t _getchar(void)
 {
 	char c;
 
-	 ssize_t read_char = read(STDIN_FILENO, &c, sizeof(char));
+	ssize_t read_char = read(STDIN_FILENO, &c, sizeof(char));
 
-	 return ((read_char == 0) ?
-			 EOF : c);
+	return ((read_char == 0) ? EOF : c);
 }
 
 /**
@@ -59,6 +58,6 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 			break;
 		}
 		position++;
-		position++;
-		return ((counter == 0) ? -1 : (counter - 1));
 	}
+	return ((counter == 0) ? -1 : (counter - 1));
+}
