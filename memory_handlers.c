@@ -2,7 +2,7 @@
 
 /**
  * free_args - frees a pointer to character pointer [an array of char pointers]
- * @args: the array to be freed;
+ * @args: the array to be free;
  */
 
 void free_args(char **args)
@@ -19,8 +19,9 @@ void free_args(char **args)
 }
 
 /**
- * free_malloc - frees a memory allocated to str
+ * is_malloc - frees a memory allocated to str
  * @str: the string with memory allocation
+ * Return : is_malloc
  */
 
 bool is_malloc(char *str)
@@ -29,8 +30,7 @@ bool is_malloc(char *str)
 	{
 		perror("Memory allocation failed");
 		return (true);
-	}
-	
+	}	
 	return (false);
 }
 
