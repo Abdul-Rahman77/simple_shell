@@ -18,6 +18,7 @@ char *getpath(const char *command, char *program_name)
 	perror("PATH environment variable not set.");
         return NULL;
     }
+
     path_copy = strdup(path);
     if (is_malloc(path_copy))
 	    return (NULL);
