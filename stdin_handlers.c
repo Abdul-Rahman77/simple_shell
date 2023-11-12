@@ -48,16 +48,16 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 				return (-1);
 			}
 			*lineptr = line;
-                *n = size;
-                }
-                (*lineptr)[position] = (char)character;
-                counter++;
-                if (character == '\n')
-                {
-                        (*lineptr)[position] = '\0';
-                        break;
-                }
-                position++;
-        }
-        return ((counter == 0)? -1: (counter - 1));
-}
+			*n = size;
+		}
+		(*lineptr)[position] = (char)character;
+		counter++;
+		if (character == '\n')
+		{
+			(*lineptr)[position] = '\0';
+			break;
+		}
+		position++;
+		position++;
+		return ((counter == 0)? -1: (counter - 1));
+	}
