@@ -9,22 +9,19 @@
 
 char *getpath(const char *command, char *program_name)
 {
-    char *path = getenv("PATH");
-    char *full_path, *full_path_copy, *path_copy, *token;
-    size_t path_len;
-
-    if (path == NULL)
-    {
-	perror("PATH environment variable not set.");
-        return NULL;
-    }
-
-    path_copy = strdup(path);
-    if (is_malloc(path_copy))
-	    return (NULL);
-    token = strtok(path_copy, ":");
-    while (token != NULL)
-    {
+	char *full_path, *full_path_copy, *path_copy, *token;
+	size_t path_len;
+	if (path == NULL)
+	{
+		perror("PATH environment variable not set.");
+		return NULL;
+	}
+	path_copy = strdup(path);
+	if (is_malloc(path_copy))
+		return (NULL);
+	token = strtok(path_copy, ":");
+	while (token != NULL)
+	{
         path_len = strlen(token) + 1 + strlen(command) + 1;
         full_path = (char *)malloc(path_len);
         if (is_malloc(full_path))
