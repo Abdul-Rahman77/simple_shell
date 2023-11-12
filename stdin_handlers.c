@@ -6,11 +6,11 @@
 
 ssize_t _getchar(void)
 {
-        char c;
+	char c;
 
-        ssize_t read_char = read(STDIN_FILENO, &c, sizeof(char));
+	 ssize_t read_char = read(STDIN_FILENO, &c, sizeof(char));
 
-        return ((read_char == 0)? EOF: c);
+	 return ((read_char == 0)? EOF: c);
 }
 
 /**
@@ -23,9 +23,9 @@ ssize_t _getchar(void)
 
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
-        int character = 0;
-        size_t position = 0;
-        ssize_t counter = 0;
+	int character = 0;
+	size_t position = 0;
+	ssize_t counter = 0;
 
         if (lineptr == NULL || n == NULL || stream == NULL)
                 return (-1);
