@@ -2,6 +2,8 @@
 
 /**
  * main - points of start of execution
+ * @argc: the command line arguments count
+ * @argv: the array of command line arguments
  * Return: 0 always
  */
 
