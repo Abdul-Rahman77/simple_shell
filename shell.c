@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	char *command, **args;
 	size_t buffer_size = 128;
 	ssize_t command_length;
-	
+
 	signal(SIGINT, signal_handler);
 	while (argc)
 	{
