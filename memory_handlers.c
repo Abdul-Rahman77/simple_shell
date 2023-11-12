@@ -30,7 +30,8 @@ bool is_malloc(char *str)
 	{
 		perror("Memory allocation failed");
 		return (true);
-	}	
+	}
+
 	return (false);
 }
 
