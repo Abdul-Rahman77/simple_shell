@@ -43,7 +43,7 @@ void execute_command(char **args);
 bool is_found(char *executable);
 
 /* path_handlers */
-char *getpath(const char *filename, char *program_name);
+char *getpath(const char *filename);
 char *get_full_path(const char *command, char *token);
 
 /* command dispatching handlers */

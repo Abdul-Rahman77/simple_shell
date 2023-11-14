@@ -9,7 +9,7 @@
 char **builtin(char **args, char *command, ssize_t len, size_t buffer_size)
 {
         prompt();
-        len = _getline(&command, &buffer_size, stdin);
+        len = getline(&command, &buffer_size, stdin);
         if (len == -1)
         {
                 free(command);
@@ -25,18 +25,8 @@ char **builtin(char **args, char *command, ssize_t len, size_t buffer_size)
         }
 	free(command);
 	return (args);
-	/*
-	args[0] = getpath(args[0], program);
-	if (args[0] == NULL)
-	{
-		free(command);
-		free_args(args);
-	}
-	execute_command(args);
-	free_args(args);
-	free(command);
-	*/
 }
+
 /**
  * main - points of start of execution
  * @argc: the command line arguments count
@@ -52,7 +42,7 @@ int main(int argc, char *argv[])
 	void (*built)(char **args);
 
 	signal(SIGINT, signal_handler);
-	while (argc)
+	while (argc && argv)
 	{
 		command = NULL;
 		args = builtin(args, command, command_length, buffer_size);
@@ -60,22 +50,24 @@ int main(int argc, char *argv[])
 			continue;
 		else
 		{
-			built = is_command(args);
-			if (built)
-			{
-				free(command);
-				built(args);
-			}
-			args[0] = getpath(args[0], argv[0]);
+			args[0] = getpath(args[0]);
 			if (args[0] == NULL)
 			{
 				free(command);
 				free_args(args);
 				continue;
 			}
-			execute_command(args);
-			free_args(args);
-			free(command);
+			if (is_found(args[0]))
+			{
+				execute_command(args);
+				free_args(args);
+				free(command);
+			}
+			else if ((built = is_command(args)))
+			{
+				free(command);
+				built(args);
+			}
 		}
 	}
 	return (0);

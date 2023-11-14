@@ -7,9 +7,9 @@
  * Return: the full path to the executable
  */
 
-char *getpath(const char *command, char *program_name)
+char *getpath(const char *command)
 {
-	char *path = getenv("PATH"), *full_path, *full_path_copy, *path_copy, *token;
+	char *path = getenv("PATH"), *full_path, *full_path_copy, *path_copy, *token, *copy;
 	size_t path_len;
 
 	if (path == NULL)
@@ -34,7 +34,7 @@ char *getpath(const char *command, char *program_name)
 		full_path_copy = get_full_path(command, token);
 		_strcpy(full_path, full_path_copy);
 		free(full_path_copy);
-		if (is_found(full_path))
+		if (access(full_path, F_OK) == 0)
 		{
 			free(path_copy);
 			return full_path;
@@ -44,10 +44,9 @@ char *getpath(const char *command, char *program_name)
 	}
 	if (command  == NULL)
 		return (NULL);
-	print(program_name);
-	print(": No such file or directory\n");
 	free(path_copy);
-	return (NULL);
+	copy = _strdup(command);
+	return (copy);
 }
 
 /**

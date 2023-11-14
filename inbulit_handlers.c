@@ -8,16 +8,15 @@
 
 void (*is_command(char **args))(char **args)
 {
-	int i = 0, j = 0;
+	int i = 0, j;
 	get_command command[] = {
 		{"exit", _exit_},
 		{NULL, NULL}
 	};
 
-	if (!args)
-		return (0);
-	for (i = 0; command[i].command_name != NULL; i++)
+	for (i = 0; command[i].command_name; i++)
 	{
+		j = 0;
 		if (command[i].command_name[j] == args[0][j])
 		{
 			for (j = 0; args[0][j] != '\0'; j++)
