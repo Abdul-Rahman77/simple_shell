@@ -55,23 +55,21 @@ char *_malloc(size_t size)
 }
 
 /**
- * _realloc - reallocates memory for an existing malloc string
- * @str: the char pointer to be reallocated memory for
- * @size: the size of the new new allocation
+ * alloc_token - reallocates memory for an existing malloc string
+ * @token: the char pointer to be reallocated memory for
  * Return: a pointer to the newly allocated memory
  */
 
-char *_realloc(char *str, size_t size)
+char *alloc_token(const char *token)
 {
-	str = realloc(str, size);
+	char *new_token = _strdup(token);
 
-	if (str == NULL)
+	if (!new_token)
 	{
-		perror("Memory reallocation error");
-		exit(EXIT_FAILURE);
+	perror("Memory allocation error");
+	exit(EXIT_FAILURE);
 	}
-
-	return (str);
+	return (new_token);
 }
 
 /**
@@ -83,12 +81,13 @@ char *_realloc(char *str, size_t size)
 
 char **realloc_args(char **args, size_t size)
 {
-	args = (char **)realloc(args, size * sizeof(char));
-	if (args == NULL)
+	char **tok = (char **)realloc(args, (size + 1) * sizeof(char *));
+
+	if (!tok)
 	{
-		perror("Memory reallocation failed");
+		perror("Memory allocation error");
+		free(args);
 		exit(EXIT_FAILURE);
 	}
-
-	return (args);
+	return (tok);
 }

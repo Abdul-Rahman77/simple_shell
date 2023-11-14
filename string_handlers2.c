@@ -57,3 +57,39 @@ char *_strncpy(char *dest, char *src, int n)
 	return (dest);
 }
 
+/**
+ * tokenizer - generates token from the command entered
+ * @command: the command to be parsed and tokenized
+ * Return: the tokens generated
+ */
+
+char **tokenizer(char *command)
+{
+	char *token, *command_copy, *delim = " \t\n";
+	int i = 0;
+	char **tok = (char **)malloc(sizeof(char *));
+
+	if (!tok)
+	{
+		perror("Memory allocation error");
+		exit(EXIT_FAILURE);
+	}
+	command_copy = _strdup(command);
+	if (!command_copy)
+	{
+		perror("Memory allocation error");
+		exit(EXIT_FAILURE);
+	}
+	while ((token = strtok(i == 0 ? command_copy : NULL, delim)))
+	{
+		tok = realloc_args(tok, i);
+		tok[i] = alloc_token(token);
+		i++;
+	}
+	tok = realloc_args(tok, i);
+	tok[i] = NULL;
+
+	free(command_copy);
+	return (tok);
+}
+

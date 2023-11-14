@@ -55,7 +55,7 @@ char *_strdup(const char *str)
 		return (NULL);
 	}
 
-	len = strlen(str) + 1;
+	len = _strlen(str) + 1;
 
 	duplicate = (char *)malloc(len);
 	if (duplicate == NULL)
@@ -94,48 +94,5 @@ char *_strcat(char *dest, const char *src)
 
 	dest[i] = '\0';
 	return (dest);
-}
-
-/**
- * tokenizer - generates token from the command entered
- * @command: the command to be parsed and tokenized
- * Return: the tokens generated
- */
-
-char **tokenizer(char *command)
-{
-	char *token, *command_copy;
-	char *delim = " \t\n";
-	char **tok = NULL;
-	int i = 0;
-
-	command_copy = _strdup(command);
-	is_malloc(command_copy);
-	tok = (char **)malloc(sizeof(char *));
-	if (tok == NULL)
-	{
-		perror("Memory allocation error");
-		free(command_copy);
-		exit(EXIT_FAILURE);
-	}
-	token = strtok(command_copy, delim);
-	while (token != NULL)
-	{
-		tok = realloc_args(tok, (i + 1) * sizeof(char));
-		tok[i] = _strdup(token);
-		if (tok[i] == NULL)
-		{
-			perror("Memory allocation error");
-			free(command_copy);
-			free_args(tok);
-			exit(EXIT_FAILURE);
-		}
-		token = strtok(NULL, delim);
-		i++;
-	}
-	tok = realloc_args(tok, (i + 1) * sizeof(char *));
-	tok[i] = NULL;
-	free(command_copy);
-	return (tok);
 }
 

@@ -9,59 +9,41 @@
 
 char *getpath(const char *command, char *program_name)
 {
-<<<<<<< HEAD
-	char *full_path, *full_path_copy, *path_copy, *token;
-	size_t path_len;
-	if (path == NULL)
-	{
-		perror("PATH environment variable not set.");
-		return NULL;
-	}
-	path_copy = strdup(path);
-	if (is_malloc(path_copy))
-		return (NULL);
-	token = strtok(path_copy, ":");
-	while (token != NULL)
-	{
-        path_len = strlen(token) + 1 + strlen(command) + 1;
-        full_path = (char *)malloc(path_len);
-        if (is_malloc(full_path))
-=======
-	char *path = getenv("PATH");
-	char *full_path, *full_path_copy, *path_copy, *token;
+	char *path = getenv("PATH"), *full_path, *full_path_copy, *path_copy, *token;
 	size_t path_len;
 
 	if (path == NULL)
->>>>>>> dda2f0dc4ac2c9b41541873579324a9b9a739142
 	{
 		perror("PATH environment variable not set.");
 		return (NULL);
 	}
 
-	path_copy = strdup(path);
+	path_copy = _strdup(path);
 	if (is_malloc(path_copy))
 		return (NULL);
 	token = strtok(path_copy, ":");
-	while (token != NULL)
+	while (token && command)
 	{
-		path_len = strlen(token) + 1 + strlen(command) + 1;
+		path_len = (_strlen(token) + 1) + (_strlen(command) + 1);
 		full_path = (char *)malloc(path_len);
-		if (is_malloc(full_path))
+		if (!full_path)
 		{
 			free(path_copy);
 			return (NULL);
 		}
 		full_path_copy = get_full_path(command, token);
-		strcpy(full_path, full_path_copy);
+		_strcpy(full_path, full_path_copy);
 		free(full_path_copy);
-		if (access(full_path, X_OK) == 0)
+		if (is_found(full_path))
 		{
 			free(path_copy);
-			return (full_path);
+			return full_path;
 		}
 		free(full_path);
 		token = strtok(NULL, ":");
 	}
+	if (command  == NULL)
+		return (NULL);
 	print(program_name);
 	print(": No such file or directory\n");
 	free(path_copy);
@@ -80,9 +62,14 @@ char *get_full_path(const char *command, char *token)
 	size_t len = _strlen(token) + 1 + _strlen(command) + 1;
 	char *fullpath = (char *)malloc(sizeof(char) * len);
 
+	if (fullpath == NULL)
+	{
+		perror("Memory allocation failed");
+		return (NULL);
+	}
 	_strcpy(fullpath, token);
 	_strcat(fullpath, "/");
 	_strcat(fullpath, command);
-
+	
 	return (fullpath);
 }
