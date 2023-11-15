@@ -68,6 +68,12 @@ int main(int argc, char *argv[])
 				free(command);
 				built(args);
 			}
+			else
+			{
+				perror(argv[0]);
+				free_args(args);
+				free(command);
+			}
 		}
 	}
 	return (0);

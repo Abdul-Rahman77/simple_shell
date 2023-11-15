@@ -9,7 +9,7 @@
 
 char *getpath(const char *command)
 {
-	char *path = getenv("PATH"), *full_path, *full_path_copy, *path_copy, *token, *copy;
+	char *path = _getenv("PATH"), *full_path, *full_path_copy, *path_copy, *token, *copy;
 	size_t path_len;
 
 	if (path == NULL)
