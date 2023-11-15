@@ -141,23 +141,39 @@ void _unsetenv(char **args)
 }
 
 /**
- * _exit_ - exits the shell with or without a return of status n
- * @args: array of words of the entered line
+ * concatenator - concatenates 3 strings in a newly allocated memory
+ * @command: first string
+ * @delim: second string
+ * @path: Third string
+ * Return: pointer to the dest string
  */
-void _exit_(char **args)
+char *concatenator(char *command, char *delim, char *path)
 {
-	int i, n;
+        char *dest;
+        int command_len, sep_len, path_len, i, k;
 
-	if (args[1])
-	{
-		n = _atoi(args[1]);
-		if (n <= -1)
-			n = 2;
-		free_args(args);
-		exit(n);
-	}
-	for (i = 0; args[i]; i++)
-		free(args[i]);
-	free(args);
-	exit(0);
+        command_len = _strlen(command);
+        sep_len = _strlen(delim);
+        path_len = _strlen(path);
+
+        dest = malloc(command_len + sep_len + path_len + 1);
+        if (!dest)
+                return (NULL);
+
+        for (i = 0; i < command_len; i++)
+                dest[i] = command[i];
+        k = i;
+
+        for (i = 0; i < sep_len; i++)
+                dest[k + i] = delim[i];
+        k += i;
+
+        for (i = 0; i < path_len; i++)
+                dest[k + i] = path[i];
+        k += i;
+
+        dest[k] = '\0';
+
+        return (dest);
 }
+

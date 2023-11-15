@@ -57,4 +57,11 @@ typedef struct get_command
 void (*is_command(char **args))(char **args);
 void _exit_(char **args);
 
+/* env handlers */
+char *_getenv(const char *env_name);
+void env(char **args __attribute__ ((unused)));
+void _setenv(char **args);
+void _unsetenv(char **args);
+char *concatenator(char *command, char *delim, char *path);
+
 #endif

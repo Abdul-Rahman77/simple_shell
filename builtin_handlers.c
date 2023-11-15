@@ -11,6 +11,9 @@ void (*is_command(char **args))(char **args)
 	int i = 0, j;
 	get_command command[] = {
 		{"exit", _exit_},
+		{"env", env},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
 		{NULL, NULL}
 	};
 
