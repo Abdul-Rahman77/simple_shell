@@ -149,31 +149,31 @@ void _unsetenv(char **args)
  */
 char *concatenator(char *command, char *delim, char *path)
 {
-        char *dest;
-        int command_len, sep_len, path_len, i, k;
+	char *dest;
+	int command_len, sep_len, path_len, i, k;
 
-        command_len = _strlen(command);
-        sep_len = _strlen(delim);
-        path_len = _strlen(path);
+	command_len = _strlen(command);
+	sep_len = _strlen(delim);
+	path_len = _strlen(path);
 
-        dest = malloc(command_len + sep_len + path_len + 1);
-        if (!dest)
-                return (NULL);
+	dest = malloc(command_len + sep_len + path_len + 1);
+	if (!dest)
+		return (NULL);
 
-        for (i = 0; i < command_len; i++)
-                dest[i] = command[i];
-        k = i;
+	for (i = 0; i < command_len; i++)
+		dest[i] = command[i];
+	k = i;
 
-        for (i = 0; i < sep_len; i++)
-                dest[k + i] = delim[i];
-        k += i;
+	for (i = 0; i < sep_len; i++)
+		dest[k + i] = delim[i];
+	k += i;
 
-        for (i = 0; i < path_len; i++)
-                dest[k + i] = path[i];
-        k += i;
+	for (i = 0; i < path_len; i++)
+		dest[k + i] = path[i];
+	k += i;
 
-        dest[k] = '\0';
+	dest[k] = '\0';
 
-        return (dest);
+	return (dest);
 }
 

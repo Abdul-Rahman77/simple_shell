@@ -3,13 +3,13 @@
 /**
  * getpath - uses the path to find executable files
  * @command: the file to be found
- * @program_name: receives the first main argument
  * Return: the full path to the executable
  */
 
 char *getpath(const char *command)
 {
-	char *path = _getenv("PATH"), *full_path, *full_path_copy, *path_copy, *token, *copy;
+	char *path = _getenv("PATH"), *full_path;
+	char *full_path_copy, *path_copy, *token, *copy;
 	size_t path_len;
 
 	if (path == NULL)
@@ -37,7 +37,7 @@ char *getpath(const char *command)
 		if (access(full_path, F_OK) == 0)
 		{
 			free(path_copy);
-			return full_path;
+			return (full_path);
 		}
 		free(full_path);
 		token = strtok(NULL, ":");
@@ -69,6 +69,5 @@ char *get_full_path(const char *command, char *token)
 	_strcpy(fullpath, token);
 	_strcat(fullpath, "/");
 	_strcat(fullpath, command);
-	
 	return (fullpath);
 }

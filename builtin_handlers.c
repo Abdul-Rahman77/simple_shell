@@ -37,7 +37,7 @@ void (*is_command(char **args))(char **args)
 }
 
 /**
- * _exit - exits the simple shell program
+ * _exit_ - exits the simple shell program
  * @args: the tokenized command
  */
 
